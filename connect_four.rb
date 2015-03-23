@@ -6,14 +6,14 @@ class Board
     @player = player
   end
 
-  def place(player, position, x = 0)
-    return "Column Filled!" if x == 7
-    if @board[position][x] == ' '
-      @board[position][x].replace(player)
+  def place(player, position, y = 0)
+    return nil if y == 7
+    if @board[position][y] == ' '
+      @board[position][y].replace(player)
+      return [position,y]
     else
-      place(player, position, x += 1)
+      place(player, position, y += 1)
     end
-    check_connect_four(player, position, board[position].index(player))
   end
 
   def check_connect_four(player, x, y)

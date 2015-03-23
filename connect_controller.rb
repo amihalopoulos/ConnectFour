@@ -23,7 +23,7 @@ loop do
     end until placement = board.place(player, position) #unless it returns "Column Filled!"
     board.check_connect_four(player, placement[0], placement[1])
     if board.winner
-      puts board
+      p board.to_s
       puts "Player #{player} WINS!"
       break
     elsif board.tie

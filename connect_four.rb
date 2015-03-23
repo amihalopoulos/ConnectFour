@@ -6,20 +6,20 @@ class Board
     @player = player
   end
 
-  def place(player, position, y = 0)
+  def place(player, x, y = 0)
     return nil if y == 7
-    if @board[position][y] == ' '
-      @board[position][y].replace(player)
-      return [position,y]
+    if cell(x, y) == ' '
+      cell(x,y).replace(player)
+      return [x,y]
     else
-      place(player, position, y += 1)
+      place(player, x, y += 1)
     end
   end
 
   def check_connect_four(player, x, y)
     if check_left_right(player, x, y) == 4 || check_top_left_diag(player, x, y) == 4 || check_top_right_diag(player, x, y) == 4 || check_up_down(player, x, y) == 4
       @winner = true
-    elsif !@board.flatten.include?(' ')
+    elsif !board.flatten.include?(' ')
       @tie = true
     else
       false
@@ -55,16 +55,17 @@ class Board
     if x < 0 || x > 6 || y < 0 || y > 7
       return nil
     else
-      @board[x][y]
+      board[x][y]
     end
   end
 
   def to_s
-    @board.transpose.reverse.each do |column|
+    board.transpose.reverse.each do |column|
       puts "| " + column.join(' ') + " |"
     end
       puts "-----------------"
       puts "- 0 1 2 3 4 5 6 -"
+      return "  Connect Four!"
   end
 
   def clear_screen

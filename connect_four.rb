@@ -5,10 +5,11 @@
 #  -take arguments of player, column (X, 3)
 
 class Board
-    attr_reader :board
+    attr_reader :board, :winner
   def initialize(player)
     @board = Array.new(7) {[" ", " ", " ", " ", " ", " ", " "]}
     @player = player
+    @winner = false
   end
 
   def place(player, position, x = 0)
@@ -25,12 +26,16 @@ class Board
 
   def check_connect_four(player, x, y)
     if check_left_right(player, x, y, count = 0) == 4
+      winner = true
       true
     elsif check_top_left_diag(player, x, y, count = 0) == 4
+      winner = true
       true
     elsif check_top_right_diag(player, x, y, count = 0) == 4
+      winner = true
       true
     elsif check_up_down(player, x, y, count = 0) == 4
+      winner = true
       true
     else
       false
@@ -62,22 +67,6 @@ class Board
     end
   end
 
-
-  def check(player, x, y)
-    i = 1
-    until i > 3
-      cell(x + i, y) #==> 'x' or ' '
-      cell(x - i, y)
-      cell(x, y - i)
-      cell(x, y + i)
-      cell(x + i, y + i)
-      cell(x - i, y + i)
-      cell(x + i, y - i)
-      cell(x - i, y - i)
-      i += 1
-    end
-  end
-
   def cell(x, y)
     if x < 0 || x > 7 || y < 0 || y > 6
       return nil
@@ -85,8 +74,6 @@ class Board
       @board[x][y]
     end
   end
-
-
 
   def to_s
     @board.transpose.reverse.each do |column|
@@ -100,23 +87,25 @@ class Board
     print "\e[H\e[2J"
   end
 
-  def winner
-
-  end
+  # def winner
+  #   check_connect_four
+  # end
 
 end
 
-#   game1 = Board.new(players = ["x", "y"])
-#    game1.place("x", 3)
-#  game1.place("O", 3)
-#  game1.place("O", 3)
-#  game1.place("O", 3)
-#  game1.place("O", 3)
-# # game1.place("O", 3)
-# # game1.place("O", 3)
-# # game1.place("X", 3)
-#  game1.to_s
-#  p game1.check_connect_four("O", 3, 0)
+  game1 = Board.new(players = ["x", "y"])
+   game1.place("x", 3)
+ game1.place("O", 3)
+ game1.place("O", 3)
+ game1.place("O", 3)
+ p game1.winner
+ game1.place("O", 3)
+# game1.place("O", 3)
+# game1.place("O", 3)
+# game1.place("X", 3)
+# game1.to_s
+ p game1.check_connect_four("O", 3, 0)
+ p game1.winner
 
 
 

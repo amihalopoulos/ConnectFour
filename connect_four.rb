@@ -7,16 +7,21 @@
 class Board
 
   def initialize
-    @board = Array.new(7) {[' ',' ',' ',' ',' ',' ']}
+    @board = Array.new(7) {["-", "-", "-", "-", "-", "-", "-"]}
     @col_board = @board.transpose
   end
 
-  def place(player, position)
-    @col_board[position] << player
+  def place(player, position, x = -1)
+    return "Column Filled!" if x == -8
+    if @board[position][x] == '-'
+      @board[position][x].replace(player)
+    else
+      place(player, position, x -= 1)
+    end
   end
 
   def to_s
-    @col_board.each do |column|
+    @board.transpose.each do |column|
       puts "| " + column.join(' ') + " |"
     end
       puts "-----------------"
@@ -27,6 +32,13 @@ end
 
 game1 = Board.new
 game1.place("x", 3)
+game1.place("O", 3)
+game1.place("O", 3)
+game1.place("O", 3)
+game1.place("O", 3)
+game1.place("O", 3)
+game1.place("O", 3)
+game1.place("X", 3)
 game1.to_s
 
 

@@ -9,7 +9,6 @@ class Board
   def initialize(player)
     @board = Array.new(7) {[" ", " ", " ", " ", " ", " ", " "]}
     @player = player
-    @winner = false
   end
 
   def place(player, position, x = 0)
@@ -19,24 +18,13 @@ class Board
     else
       place(player, position, x += 1)
     end
-    y = @board[position].index(player)
-    x = position
+    check_connect_four(player, position, board[position].index(player))
     #call method to check connect 4
   end
 
   def check_connect_four(player, x, y)
-    if check_left_right(player, x, y, count = 0) == 4
-      winner = true
-      true
-    elsif check_top_left_diag(player, x, y, count = 0) == 4
-      winner = true
-      true
-    elsif check_top_right_diag(player, x, y, count = 0) == 4
-      winner = true
-      true
-    elsif check_up_down(player, x, y, count = 0) == 4
-      winner = true
-      true
+    if check_left_right(player, x, y) == 4 || check_top_left_diag(player, x, y) == 4 || check_top_right_diag(player, x, y) == 4 || check_up_down(player, x, y) == 4
+      @winner = true
     else
       false
     end
@@ -68,7 +56,7 @@ class Board
   end
 
   def cell(x, y)
-    if x < 0 || x > 7 || y < 0 || y > 6
+    if x < 0 || x > 6 || y < 0 || y > 7
       return nil
     else
       @board[x][y]
@@ -83,29 +71,34 @@ class Board
       puts "- 0 1 2 3 4 5 6 -"
   end
 
+  def tie?
+
+  end
+
+  def winner
+
+  end
+
   def clear_screen
     print "\e[H\e[2J"
   end
 
-  # def winner
-  #   check_connect_four
-  # end
-
 end
 
-  game1 = Board.new(players = ["x", "y"])
-   game1.place("x", 3)
- game1.place("O", 3)
- game1.place("O", 3)
- game1.place("O", 3)
- p game1.winner
- game1.place("O", 3)
-# game1.place("O", 3)
-# game1.place("O", 3)
-# game1.place("X", 3)
-# game1.to_s
- p game1.check_connect_four("O", 3, 0)
- p game1.winner
+#   game1 = Board.new(players = ["x", "y"])
+#    game1.place("x", 3)
+#  game1.place("O", 3)
+#  game1.place("O", 3)
+#  game1.place("O", 3)
+#  game1.place("O", 3)
+# # game1.place("O", 3)
+# # game1.place("O", 3)
+# # game1.place("X", 3)
+#  game1.to_s
+#  p game1.check_connect_four("O", 3, 1)
+#  p game1.winner
+
+
 
 
 

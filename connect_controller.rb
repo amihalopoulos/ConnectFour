@@ -1,6 +1,6 @@
 require_relative 'connect_four'
 
-player = ["X", "O"]
+player = ["X", "O"].shuffle
 
 board = Board.new(player)
 
@@ -14,16 +14,23 @@ def get_position(player)
   position
 end
 
-until false #board.winner
+loop do
   player.each do |player|
     puts board
-    # puts "Player #{player}: What's Your Move?"
-    # position = gets.chomp.to_i
     position = get_position(player)
     board.place(player, position)
+    if board.winner
+      puts board
+      puts "Player #{player} WINS!"
+      break
+    end
+    # abort(if board.winner
     board.clear_screen
   end
+  break if board.winner
 end
+
+
 
 
 

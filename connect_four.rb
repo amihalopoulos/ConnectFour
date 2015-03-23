@@ -52,11 +52,7 @@ class Board
   end
 
   def cell(x, y)
-    if x < 0 || x > 6 || y < 0 || y > 7
-      return nil
-    else
-      board[x][y]
-    end
+    x < 0 || x > 6 || y < 0 || y > 7 ? nil : board[x][y]
   end
 
   def to_s

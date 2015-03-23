@@ -7,7 +7,7 @@
 class Board
 
   def initialize
-    @board = Array.new(7) {[1,2,3,4,5,6]}
+    @board = Array.new(7) {[' ',' ',' ',' ',' ',' ']}
   end
 
   def place

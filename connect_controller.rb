@@ -28,7 +28,6 @@ loop do
       puts "Tie game! Nobody Wins! All Losers!"
       break
     end
-    # abort(if board.winner
     board.clear_screen
   end
   break if board.winner

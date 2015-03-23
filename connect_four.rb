@@ -1,8 +1,3 @@
-#pseudocode
-#
-# Initialize
-#  -create 2D array - 6 arrays each containing 7 elements and transpose them so they act as columns
-#  -take arguments of player, column (X, 3)
 
 class Board
     attr_reader :board, :winner, :tie
@@ -19,7 +14,6 @@ class Board
       place(player, position, x += 1)
     end
     check_connect_four(player, position, board[position].index(player))
-    #call method to check connect 4
   end
 
   def check_connect_four(player, x, y)
@@ -32,7 +26,7 @@ class Board
     end
   end
 
-  def check_up_down(player, x, y, count = 0) #can we pass cell(x,y)
+  def check_up_down(player, x, y, count = 0)
     count = 1+ check_direction(player, x, y, 0, 1) + check_direction(player, x, y, 0, -1)
   end
 
@@ -73,11 +67,6 @@ class Board
       puts "- 0 1 2 3 4 5 6 -"
   end
 
-  def tie?
-
-  end
-
-
   def clear_screen
     print "\e[H\e[2J"
   end
@@ -97,8 +86,3 @@ end
 #  p game1.check_connect_four("O", 3, 1)
 #  p game1.winner
 
-
-
-
-
-#>player 1 whats yuour move? input =gets.chomp

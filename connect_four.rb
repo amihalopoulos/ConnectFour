@@ -23,17 +23,45 @@ class Board
     #call method to check connect 4
   end
 
-  def check_connect_four
-    check_row || check_col || check_diag
+  def check_connect_four(player, x, y)
+    if check_left_right(player, x, y, count = 0) == 4
+      true
+    elsif check_top_left_diag(player, x, y, count = 0) == 4
+      true
+    elsif check_top_right_diag(player, x, y, count = 0) == 4
+      true
+    elsif check_up_down(player, x, y, count = 0) == 4
+      true
+    else
+      false
+    end
   end
 
   def check_up_down(player, x, y, count = 0) #can we pass cell(x,y)
-   return true if count == 4
-   if cell(x, y) == player
-    #count += 1
-    check_up_down(player, x, y + 1, count +=1)
+    count = 1+ check_direction(player, x, y, 0, 1) + check_direction(player, x, y, 0, -1)
   end
+
+  def check_left_right(player, x, y, count = 0)
+    count = 1+ check_direction(player, x, y, 1, 0) + check_direction(player, x, y, -1, 0)
   end
+
+  def check_top_left_diag(player, x, y, count = 0)
+    count = 1+ check_direction(player, x, y, -1, 1) + check_direction(player, x, y, 1, -1)
+  end
+
+  def check_top_right_diag(player, x, y, count = 0)
+    count = 1+ check_direction(player, x, y, 1, 1) + check_direction(player, x, y, -1, -1)
+  end
+
+  def check_direction(player, x, y, add_x, add_y, count = 0)
+    if cell(x + add_x, y + add_y) == player
+      count +=1
+      check_direction(player, x + add_x, y + add_y, add_x, add_y, count )
+    else
+      count
+    end
+  end
+
 
   def check(player, x, y)
     i = 1
@@ -78,18 +106,17 @@ class Board
 
 end
 
-  game1 = Board.new(players = ["x", "y"])
-   game1.place("x", 3)
- game1.place("O", 3)
- game1.place("O", 3)
- game1.place("O", 3)
- game1.place("O", 3)
-# game1.place("O", 3)
-# game1.place("O", 3)
-# game1.place("X", 3)
- game1.to_s
- p game1.board
- p game1.check_up_down("O", 3, 1)
+#   game1 = Board.new(players = ["x", "y"])
+#    game1.place("x", 3)
+#  game1.place("O", 3)
+#  game1.place("O", 3)
+#  game1.place("O", 3)
+#  game1.place("O", 3)
+# # game1.place("O", 3)
+# # game1.place("O", 3)
+# # game1.place("X", 3)
+#  game1.to_s
+#  p game1.check_connect_four("O", 3, 0)
 
 
 

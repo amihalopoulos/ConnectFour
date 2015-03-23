@@ -8,13 +8,15 @@ class Board
 
   def initialize
     @board = Array.new(7) {[' ',' ',' ',' ',' ',' ']}
+    @col_board = @board.transpose
   end
 
-  def place
+  def place(player, position)
+    @col_board[position] << player
   end
 
   def to_s
-    @board.transpose.each do |column|
+    @col_board.each do |column|
       puts "| " + column.join(' ') + " |"
     end
       puts "-----------------"
@@ -24,5 +26,8 @@ class Board
 end
 
 game1 = Board.new
+game1.place("x", 3)
 game1.to_s
+
+
 #>player 1 whats yuour move? input =gets.chomp

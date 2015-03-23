@@ -23,6 +23,10 @@ loop do
       puts board
       puts "Player #{player} WINS!"
       break
+    elsif board.tie
+      puts board
+      puts "Tie game! Nobody Wins! All Losers!"
+      break
     end
     # abort(if board.winner
     board.clear_screen

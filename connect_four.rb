@@ -5,7 +5,7 @@
 #  -take arguments of player, column (X, 3)
 
 class Board
-    attr_reader :board, :winner
+    attr_reader :board, :winner, :tie
   def initialize(player)
     @board = Array.new(7) {[" ", " ", " ", " ", " ", " ", " "]}
     @player = player
@@ -25,6 +25,8 @@ class Board
   def check_connect_four(player, x, y)
     if check_left_right(player, x, y) == 4 || check_top_left_diag(player, x, y) == 4 || check_top_right_diag(player, x, y) == 4 || check_up_down(player, x, y) == 4
       @winner = true
+    elsif !@board.flatten.include?(' ')
+      @tie = true
     else
       false
     end
@@ -75,9 +77,6 @@ class Board
 
   end
 
-  def winner
-
-  end
 
   def clear_screen
     print "\e[H\e[2J"
